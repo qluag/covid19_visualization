@@ -21,9 +21,9 @@ simpleheat.prototype = {
 
     defaultGradient: {
         //0.4: 'blue',
-        //0.6: 'cyan',
-        //0.4: 'lime',
-        0.4: "yellow",
+        //0.2: 'cyan',
+        //0.2: 'lime',
+        0.3: "yellow",
         0.6: "orange",
         0.8: "#FF4500",
         1.0: "red"
@@ -48,10 +48,10 @@ simpleheat.prototype = {
         this._data = [];
         return this;
     },
-
+    
     radius: function (r, blur) {
         blur = blur === undefined ? 15 : blur;
-
+        
         // create a grayscale blurred circle image that we'll use for drawing points
         var circle = this._circle = this._createCanvas(),
             ctx = circle.getContext('2d'),
@@ -70,6 +70,7 @@ simpleheat.prototype = {
 
         return this;
     },
+
 
     resize: function () {
         this._width = this._canvas.width;
@@ -98,7 +99,7 @@ simpleheat.prototype = {
     },
 
     draw: function (minOpacity) {
-        if (!this._circle) this.radius(this.defaultRadius);
+        if (!this._circle) this._radius(this.defaultRadius);
         if (!this._grad) this.gradient(this.defaultGradient);
 
         var ctx = this._ctx;
@@ -108,6 +109,7 @@ simpleheat.prototype = {
         // draw a grayscale heatmap by putting a blurred circle at each data point
         for (var i = 0, len = this._data.length, p; i < len; i++) {
             p = this._data[i];
+ 
             ctx.globalAlpha = Math.min(Math.max(p[2] / this._max, minOpacity === undefined ? 0.25 : minOpacity), 1);
             ctx.drawImage(this._circle, p[0] +50 - this._r, p[1] +50- this._r);
         }

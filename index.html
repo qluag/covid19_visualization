@@ -17,13 +17,34 @@
 
   <!-- Topojson -->
   <script src="https://d3js.org/topojson.v2.min.js"></script>
+  
+  <!-- self defined js filess -->
+  <script src="simpleheat.js"></script>
 
-  <!-- map view here -->
-	<div id="map"></div>
+  <div id="page_title">
+  	<div>Global Spread of COVID-19</div>
+  </div>
+  <p></p>
+  
+  <div id="wrapper">
+  	<!-- map view here -->
+	  <div id="map"></div>
+	  <div id="date">Current Date</div>
+
+  
+    <!--slider-->
+    <div id="cajaSlider">
+        <div id="slider"></div>
+        <div class="init">2020-01-24</div>
+        <div class="final" id="final">2020-05-08</div>
+     </div>
+     <script src="map.js" type="text/javascript"></script>
+    </div>
+  </div>	
+
 	
 
-  <!-- map view -->
-  <script src="map.js"></script> 
+  
 
 
 	

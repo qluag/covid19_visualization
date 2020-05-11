@@ -1,25 +1,74 @@
-* {
-	font-family: Arial, Helvetica, sans-serif;
+html,
+div,
+body,
+object,
+var{
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+
 }
 
-p {
-  font-size: 0.85em;
+#wrapper {
+  width: 985px;
+  font-size: 1em;
+  margin: 10px;
 }
+
+
+body {
+	line-height: 1;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  color: #777;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: left;
+  width: 150px;
+  height: auto;
+  background: white;
+  border: 1px solid #ddd;
+  pointer-events: none;
+  font: 15px sans-serif;
+  z-index: 2;
+  padding: 10px;
+  opacity: 0;
+  line-height: 18px;
+}
+
+.path:hover {
+  cursor: pointer;
+}
+
 
 .titles{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
 }
 
-
-body {
-	margin: auto;
+#date{
+	float: right;
 	font-family: Arial, Helvetica, sans-serif;
 	font-style: normal;
-	font-size: 12px;
+	font-size: 25px;
+	font-weight: bold;
+	padding-right: 195px;
+	padding-bottom: 20px;
+}
+#page_title{
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-size: 28px;
 	font-weight: bold;
 	color: #955251; /* Marsala */
-	text-align: center;
+  text-align: center;
+	
 }	
 
 text {
@@ -27,12 +76,59 @@ text {
 }
 
 /* map setting */
-svg {
-	background: #efefef; /*light grey bg */
+#mapBG {
+	position: absolute;
+	background: #d5e8eb; /* #070809 */
 	margin-left: auto;
-  margin-right: auto;
-  display: block;
+	margin-right: auto;
+	
 }
+
+
+canvas {
+	position: relative;
+
+}
+
+/* timeline slider */
+#cajaSlider {
+  float: left;
+  margin-top: 0px;
+  height: 620px;
+  width: 985px;
+}
+
+.axis {
+  fill: rgba(172, 172, 172, 1);
+}
+
+.slideraxis {
+  fill: #bbb;
+}
+
+path.cursor {
+  fill: #d0694c;
+}
+
+#slider {
+  float: left;
+  width: 935px;
+  height: 45px;
+}
+
+.init {
+  padding-left: 4px;
+  float: left;
+  font-size: 0.8em;
+}
+
+.final {
+  padding-right: 195px;
+  float: right;
+  font-size: 0.8em;
+}
+
+/* map */
 
 .lines {
 	fill: none;
@@ -42,13 +138,13 @@ svg {
 }
 
 .country {
-	fill: #8b99a7;
+	fill: #fbf8f3; /* #586674 */
 }
 
 .boundary {
 	fill: none;
 	stroke-width: 0.5px;
-	stroke: #fff;
+	stroke: #cfc4c5; /* #b6bfc8 */
 }
 
 .selected {
@@ -67,6 +163,7 @@ svg {
   padding: 15px 20px;
   cursor: pointer;
 }
+
 
 path.chord {
   fill-opacity: .80;
