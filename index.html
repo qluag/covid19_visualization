@@ -27,18 +27,111 @@
   <p></p>
   
   <div id="wrapper">
-  	<!-- map view here -->
-	  <div id="map"></div>
+  	<!-- buttons -->
+  	<input type="button" value="Confirmed" id="b1"/>
+  	<input type="button" value="Deaths" id="b2"/>
+  	<input type="button" value="Recovered" id="b3"/>
+    
+    <!-- map view here -->
+  	<div>
+  		<div id="m1"></div>
+  		<div id="m2"></div>
+  		<div id="m3"></div>
+  	</div>
+
+  	<!-- date view here -->
 	  <div id="date">Current Date</div>
 
   
     <!--slider-->
-    <div id="cajaSlider">
-        <div id="slider"></div>
+    <div>
+    	<div id="cajaSlider1">
+        <div id="slider1"></div>
         <div class="init">2020-01-24</div>
-        <div class="final" id="final">2020-05-08</div>
+        <div class="final" id="final1">2020-05-08</div>
      </div>
-     <script src="map.js" type="text/javascript"></script>
+     <div id="cajaSlider2">
+        <div id="slider2"></div>
+        <div class="init">2020-01-24</div>
+        <div class="final" id="final2">2020-05-08</div>
+     </div>
+     <div id="cajaSlider3">
+        <div id="slider3"></div>
+        <div class="init">2020-01-24</div>
+        <div class="final" id="final3">2020-05-08</div>
+     </div>
+    </div>
+    
+
+    <script src="map.js"></script>
+    <script src="map_deaths.js"></script>
+    <script src="map_recovered.js"></script>
+
+    <script type="text/javascript">
+     	var map1 = document.getElementById("m1");
+     	var map2 = document.getElementById("m2");
+     	var map3 = document.getElementById("m3");
+     	var s1 = document.getElementById("cajaSlider1");
+     	var s2 = document.getElementById("cajaSlider2");
+     	var s3 = document.getElementById("cajaSlider3");
+
+     	map2.style.display = s2.style.display ='none'
+     	map3.style.display = s3.style.display ='none'
+
+     	var button1 = document.getElementById("b1");
+     	var button2 = document.getElementById("b2");
+      var button3 = document.getElementById("b3");
+
+      button1.disabled = true
+
+      button1.onclick = function() {
+			button1.disabled = true
+			button2.disabled = false
+			button3.disabled = false
+    		if (map1.style.display !== 'none') {
+        		map1.style.display = s1.style.display = 'none';
+        		map2.style.display = s2.style.display = 'block';
+        		map3.style.display = s3.style.display = 'block'
+    		}
+    		else {
+        		map1.style.display = s1.style.display = 'block';
+        		map2.style.display = s2.style.display = 'none';
+        		map3.style.display = s3.style.display = 'none'
+    	}};
+
+    	button2.onclick = function() {
+			button2.disabled = true
+			button1.disabled = false
+			button3.disabled = false
+    		if (map2.style.display !== 'none') {
+        		map2.style.display = s2.style.display = 'none';
+        		map1.style.display = s1.style.display ='block';
+        		map3.style.display = s3.style.display ='block'
+    		}
+    		else {
+        		map2.style.display = s2.style.display ='block';
+        		map1.style.display = s1.style.display ='none';
+        		map3.style.display = s3.style.display ='none'
+    	}};
+
+    	button3.onclick = function() {
+			button3.disabled = true
+			button2.disabled = false
+			button1.disabled = false
+    		if (map3.style.display !== 'none') {
+        		map3.style.display = s3.style.display ='none';
+        		map2.style.display = s2.style.display ='block';
+        		map1.style.display = s1.style.display ='block'
+    		}
+    		else {
+        		map3.style.display = s3.style.display ='block';
+        		map2.style.display = s2.style.display ='none';
+        		map1.style.display = s1.style.display ='none'
+    	}};
+
+
+
+    </script>
     </div>
   </div>	
 

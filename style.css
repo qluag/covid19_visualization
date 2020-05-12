@@ -12,6 +12,13 @@ var{
 
 }
 
+button{
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  background-color: #fbf8f3;
+}
+
 #wrapper {
   width: 985px;
   font-size: 1em;
@@ -20,7 +27,7 @@ var{
 
 
 body {
-	line-height: 1;
+  line-height: 1;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.2em;
   color: #777;
@@ -47,53 +54,58 @@ div.tooltip {
 
 
 .titles{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
 }
 
-#date{
-	float: right;
-	font-family: Arial, Helvetica, sans-serif;
-	font-style: normal;
-	font-size: 25px;
-	font-weight: bold;
-	padding-right: 195px;
-	padding-bottom: 20px;
-}
 #page_title{
 
-	font-family: Arial, Helvetica, sans-serif;
-	font-style: normal;
-	font-size: 28px;
-	font-weight: bold;
-	color: #955251; /* Marsala */
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 28px;
+  font-weight: bold;
+  color: #955251; /* Marsala */
   text-align: center;
-	
-}	
+  
+} 
 
 text {
-	font-size: 9px;
+  font-size: 9px;
 }
 
 /* map setting */
 #mapBG {
-	position: absolute;
-	background: #d5e8eb; /* #070809 */
-	margin-left: auto;
-	margin-right: auto;
-	
+  position: absolute;
+  background: #d5e8eb; /* #070809 */
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 
 canvas {
-	position: relative;
+  position: relative;
 
 }
 
 /* timeline slider */
-#cajaSlider {
+#date{
   float: left;
-  margin-top: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 444px;
+  margin-left: 808px;
+    height: 120px;
+    width: 185px;
+    z-index: 99 !important;
+}
+#cajaSlider1,
+#cajaSlider2,
+#cajaSlider3 {
+  float: left;
+  margin-top: -125px;
   height: 620px;
   width: 985px;
 }
@@ -110,7 +122,7 @@ path.cursor {
   fill: #d0694c;
 }
 
-#slider {
+#slider1, #slider2, #slider3 {
   float: left;
   width: 935px;
   height: 45px;
@@ -131,34 +143,34 @@ path.cursor {
 /* map */
 
 .lines {
-	fill: none;
-	stroke-width: 0.5px;
-	stroke-opacity: 0.45; 
-	stroke: #777;
+  fill: none;
+  stroke-width: 0.5px;
+  stroke-opacity: 0.45; 
+  stroke: #777;
 }
 
 .country {
-	fill: #fbf8f3; /* #586674 */
+  fill: #fbf8f3; /* #586674 */
 }
 
 .boundary {
-	fill: none;
-	stroke-width: 0.5px;
-	stroke: #cfc4c5; /* #b6bfc8 */
+  fill: none;
+  stroke-width: 0.5px;
+  stroke: #cfc4c5; /* #b6bfc8 */
 }
 
 .selected {
-	fill: #b6bfc8;
-	stroke: #fff;
-	stroke-width: 0.5px; 
+  fill: #b6bfc8;
+  stroke: #fff;
+  stroke-width: 0.5px; 
 }
 
 /* button setting */
 .button{
-	background-color: #955251;
-	border: none;
-	border-radius: 9px;
-	color: white;
+  background-color: #955251;
+  border: none;
+  border-radius: 9px;
+  color: white;
   text-align: center;
   padding: 15px 20px;
   cursor: pointer;

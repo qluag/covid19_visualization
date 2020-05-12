@@ -10,7 +10,7 @@
   .attr("opacity", 0);
 
   var origin;
-  var svg = d3.select("#m1")
+  var svg = d3.select("#m3")
             .append("svg")
             .attr("id", "mapBG")
             .attr("height", height + margin.top + margin.bottom)
@@ -46,14 +46,13 @@
   var width_slider = 795;
   var height_slider = 50;
 
-  //var confirmed;
-  var tconfirmed;
+  //var recovered;
+  var trecovered;
   var timeseries;
 
 
   Promise.all([d3.json("world-110m.json"), d3.tsv("world-110m-country-names.tsv"),
-    d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"),
-    d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv")])
+    d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")])
   .then(updateMap)
 
   /* functions */
@@ -72,26 +71,17 @@
     console.log(countries)
     //console.log(centroids)
 
-    console.log(data[2]) // confirmed cases
-    console.log(data[3]) // US
+    console.log(data[2]) // recovered cases
     
-    confirmed_global = data[2].filter(function(d){
-      if (d["Country/Region"] != "US"){
-        return d;
-      }
-    })
-    confirmed_us = data[3];
   
 
     // as tidy data
-    tconfirmed_global = tidy(confirmed_global, "confirmed", false);
-    tconfirmed_us = tidy(confirmed_us, "confirmed", true);
-    tconfirmed = tconfirmed_global.concat(tconfirmed_us);
-    console.log(tconfirmed)
+    trecovered = tidy(data[2], "recovered", false);
+
 
     // get time series
     var tmp = [];
-    timeseries = tconfirmed.filter(function (d){
+    timeseries = trecovered.filter(function (d){
       if (!tmp.includes(d.ymd)){
         tmp.push(d.ymd);
         return d.ymd;
@@ -105,7 +95,7 @@
     })
     //console.log(timeseries)
     // the date of today
-    d3.select("#final1").html(timeseries[timeseries.length-1]);
+    d3.select("#final3").html(timeseries[timeseries.length-1]);
 
     /* add a path for each country */
     origin = svg.selectAll(".country")
@@ -123,7 +113,7 @@
             div
               .html(
                 "<b>"+ areaName + 
-            "</b></br>confirmed cases: <b>" +
+            "</b></br>recovered cases: <b>" +
             totalInCountry(areaName, 99) + 
             "</b> <br>"
               )
@@ -156,7 +146,7 @@
     // ------SLIDER----- //
     
     var svg2 = d3
-        .select("#slider1")
+        .select("#slider3")
         .attr("class", "chart")
         .append("svg")
         .attr("width", width_slider)
@@ -270,21 +260,21 @@
   function heatMap (index){
     var heat = simpleheat(canvas);
     // set [[x,y,data]...] format
-    var confirmedToday = tconfirmed.filter(function(d){
+    var recoveredToday = trecovered.filter(function(d){
       return d.ymd == timeseries[index];
     });
     
     // get projection of coordinates
-    confirmedToday.forEach(function (d){
+    recoveredToday.forEach(function (d){
       d.coords = projection([d.long, d.lat]);
     })
-    //console.log(confirmedToday);
-    heat.data(confirmedToday.map(function (d) {
+    //console.log(recoveredToday);
+    heat.data(recoveredToday.map(function (d) {
       return [d.coords[0], d.coords[1], +d.total];
     }));
     
     heat.radius(5, 5); // point radius, blur radius
-    heat.max(d3.max(confirmedToday, d => +d.total));
+    heat.max(d3.max(recoveredToday, d => +d.total));
     heat.draw(0.4); // draw on canvas, min opacity threshold
   }
   */
@@ -301,7 +291,7 @@
             div
               .html(
                 "<b>"+ areaName + 
-            "</b></br>confirmed cases: <b>" +
+            "</b></br>recovered cases: <b>" +
             totalInCountry(areaName, index) + 
             "</b> <br>"
               )
@@ -325,16 +315,16 @@
     d3.select("#date").html(timeseries[index]);
 
     svg.select("#todayCircle").remove();
-    var confirmedToday = tconfirmed.filter(function(d){
+    var recoveredToday = trecovered.filter(function(d){
       return d.ymd == timeseries[index];
     });
     
     // get projection of coordinates
-    confirmedToday.forEach(function (d){
+    recoveredToday.forEach(function (d){
       d.coords = projection([d.long, d.lat]);
     })
 
-    var min_max = d3.extent(confirmedToday, function(d){
+    var min_max = d3.extent(recoveredToday, function(d){
       return +d.total;
     });
     //console.log(min_max)
@@ -346,7 +336,7 @@
     svg.append("g")
       .attr("id", "todayCircle")
       .selectAll("circle")
-      .data(confirmedToday)
+      .data(recoveredToday)
       .enter()
       .append("circle")
       .attr("cx", function(d){
@@ -358,7 +348,7 @@
       .attr("r", function(d){
         return cal_r(d.total);
       })
-      .attr("fill", "#ff981a")
+      .attr("fill", " #34b234")
       .attr("fill-opacity", 0.4);
   }
 
@@ -429,19 +419,19 @@ function totalInCountry(name, index){
   var date = timeseries[index];
   var total = 0;
   
-  for (var i = 0; i < tconfirmed.length; i++){
-    if (tconfirmed[i].country == name && tconfirmed[i].ymd == date){
-      total += tconfirmed[i].total;
+  for (var i = 0; i < trecovered.length; i++){
+    if (trecovered[i].country == name && trecovered[i].ymd == date){
+      total += trecovered[i].total;
     }
     // US special case
-    if (name == "United States" && tconfirmed[i].country == "US"
-     && tconfirmed[i].ymd == date){
-      total += tconfirmed[i].total;
+    if (name == "United States" && trecovered[i].country == "US"
+     && trecovered[i].ymd == date){
+      total += trecovered[i].total;
     }
     // Russia Special case
-    if (name == "Russian Federation" && tconfirmed[i].country == "Russia"
-     && tconfirmed[i].ymd == date){
-      total += tconfirmed[i].total;
+    if (name == "Russian Federation" && trecovered[i].country == "Russia"
+     && trecovered[i].ymd == date){
+      total += trecovered[i].total;
     }
   }
   return total;
